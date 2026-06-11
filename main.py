@@ -20,10 +20,14 @@ def main():
         contents="How many days of rains does NYC get during the summer?" # hardcoded
     )
     # print the response
-    print(response.text)
+    if not response:
+        raise ValueError("FAILED API Request")
     
-    print("Hello from ai-agent!")
-
-
+    print("Prompt tokens:", response.usage_metadata.prompt_token_count)
+    print("Response tokens:", response.usage_metadata.candidates_token_count)
+    print("Response:\n", response.text)
+    
+    
 if __name__ == "__main__":
     main()
+
