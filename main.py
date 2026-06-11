@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from google import genai
+import argparse
 
 
 def main():
@@ -14,10 +15,15 @@ def main():
     # create instance of gemini client
     client = genai.Client(api_key=api_key)
     
+    # get user input
+    parser = argparse.ArgumentParser(description="Chatbot")
+    parser.add_argument("user_prompt", type=str, help="User Prompt")
+    args = parser.parse_args()
+    
     # send prompt and get response object from gemini
     response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents="How many days of rains does NYC get during the summer?" # hardcoded
+        contents=args.user_prompt
     )
     # print the response
     if not response:
@@ -26,6 +32,8 @@ def main():
     print("Prompt tokens:", response.usage_metadata.prompt_token_count)
     print("Response tokens:", response.usage_metadata.candidates_token_count)
     print("Response:\n", response.text)
+    
+    
     
     
 if __name__ == "__main__":
