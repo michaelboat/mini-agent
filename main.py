@@ -37,7 +37,7 @@ def main():
         raise ValueError("FAILED API Request")
     
     if args.verbose:
-        print(f"User promt: {args.user_prompt}")
+        print(f"User prompt: {args.user_prompt}")
         print("Prompt tokens:", response.usage_metadata.prompt_token_count)
         print("Response tokens:", response.usage_metadata.candidates_token_count)
     print("Response:\n", response.text)
